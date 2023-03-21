@@ -12,24 +12,26 @@
            renderer="logarithmicDepthBuffer: true;" id="scene">
 
             <a-marker id="marker_1" preset="kanji" material="" arjs-hit-testing="" visible="">
-                <a-circle position="0 0 0" color="green"></a-circle>
             </a-marker>
 
        <a-entity camera></a-entity>
        </a-scene>
-   </body>
-   <script>
 
-    fetch('/chaos.json').then(async (e) => {
-        var json = JSON.parse(await e.text());
-        const marker = document.getElementById('marker_1')
-        json.map((e) => {
-            var element = document.createElement(a-circle)
-            element.setAttribute('position', ${e['x']} ${e['y']} ${e['z']})
-            element.setAttribute('color', 'green')
-            marker.appendChild(element)
+       <script>
+        fetch('./chaos.json').then(async (e) => {
+            var json = JSON.parse(await e.text());
+            const marker = document.getElementById('marker_1')
+            json.map((e) => {
+
+                var element = document.createElement('a-sphere')
+                element.setAttribute('position', `${e['x']} ${e['y']} ${e['z']}`)
+                element.setAttribute('scale', '0.03 0.03 0.03')
+                element.setAttribute('color', 'green')
+                marker.appendChild(element)
+            })
         })
-    })
-   </script>
+       </script>
+   </body>
+  
 
 </html>
